@@ -1,0 +1,7 @@
+{
+  "name": "pawssync-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
