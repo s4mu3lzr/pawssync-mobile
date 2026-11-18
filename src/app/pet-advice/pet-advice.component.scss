@@ -1,0 +1,123 @@
+.advice-page {
+  --background: #f6f9f7;
+}
+
+.page-heading {
+  padding: 1.5rem 1.25rem 0.75rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.4rem;
+  color: #188565;
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+}
+
+h1 {
+  margin: 0;
+  color: #20342c;
+  font-size: 1.5rem;
+}
+
+.page-heading > p:last-child {
+  margin: 0.45rem 0 0;
+  color: #718078;
+  font-size: 0.9rem;
+}
+
+.conversation {
+  display: flex;
+  min-height: 55vh;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem 1rem 0.5rem;
+}
+
+.message {
+  align-self: flex-start;
+  max-width: 88%;
+  padding: 0.8rem 0.9rem 0.55rem;
+  border: 1px solid #e8eeea;
+  border-radius: 1rem 1rem 1rem 0.25rem;
+  background: #fff;
+  box-shadow: 0 2px 8px #183d2d0a;
+}
+
+.message p {
+  margin: 0;
+  color: #30433a;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+.message time {
+  display: block;
+  margin-top: 0.4rem;
+  color: #8b9991;
+  font-size: 0.68rem;
+  text-align: right;
+}
+
+.user-message {
+  align-self: flex-end;
+  border-color: #d3eee3;
+  border-radius: 1rem 1rem 0.25rem 1rem;
+  background: #e8f7f0;
+}
+
+.disclaimer {
+  margin: 0 1rem 0.75rem;
+  color: #738178;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.composer {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+  border-top: 1px solid #e7ede9;
+  background: #fff;
+}
+
+.composer input {
+  min-width: 0;
+  flex: 1;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid #dfe8e2;
+  border-radius: 1.25rem;
+  outline-color: #188565;
+  background: #f8faf9;
+  color: #20342c;
+  font: inherit;
+}
+
+.composer ion-button {
+  --background: #188565;
+  --border-radius: 50%;
+  width: 2.8rem;
+  height: 2.8rem;
+  margin: 0;
+}
+
+.input-error {
+  margin: 0 1rem 0.5rem;
+  color: #b42318;
+  font-size: 0.78rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}

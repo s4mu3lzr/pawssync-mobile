@@ -1,0 +1,37 @@
+<ion-content class="scanner-content" [fullscreen]="true">
+  <main class="scanner-screen">
+    <header class="scanner-header">
+      <span class="header-paw">🐾</span>
+      <span>VINCULAR MASCOTA</span>
+      <span class="demo-label">QR</span>
+    </header>
+
+    <section class="scanner-message">
+      <p class="eyebrow">UNA NUEVA AMISTAD</p>
+      <h1>¡Vamos a<br />conocernos!</h1>
+      <p>{{ statusMessage }}</p>
+    </section>
+
+    <div class="camera-preview" aria-label="Visor de escaneo QR">
+      <div class="preview-glow"></div>
+      <div class="scan-frame">
+        <span class="corner top-left"></span>
+        <span class="corner top-right"></span>
+        <span class="corner bottom-left"></span>
+        <span class="corner bottom-right"></span>
+        <span class="scan-line"></span>
+        <span class="scan-paw" aria-hidden="true">🐾</span>
+      </div>
+      <span class="camera-hint">CENTRA EL CÓDIGO EN EL RECUADRO</span>
+    </div>
+
+    <section class="scanner-actions">
+      <p>El QR está en la parte posterior<br />del collar de tu mascota.</p>
+      <ion-button expand="block" shape="round" [disabled]="isScanning" (click)="startScan()">
+        <span aria-hidden="true">{{ isScanning ? '…' : '⌕' }}</span>
+        {{ isScanning ? 'Abriendo cámara…' : 'Abrir cámara y escanear' }}
+      </ion-button>
+      <small>El teléfono solicitará permiso de cámara la primera vez.</small>
+    </section>
+  </main>
+</ion-content>

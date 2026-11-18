@@ -1,0 +1,86 @@
+<ion-content class="tracking-content" [fullscreen]="true">
+  <main class="tracking-screen">
+    <header class="tracking-header">
+      <div>
+        <p class="eyebrow">MODO AVENTURA</p>
+        <h1>{{ selectedPets.length ? 'Paseo con ' + selectedPets.length + ' mascota(s)' : 'Nuevo paseo' }}</h1>
+      </div>
+      <span class="demo-chip">GPS REAL</span>
+    </header>
+
+    @if (isLoading) {
+      <p class="tracking-note">Cargando tus mascotas…</p>
+    } @else if (loadError) {
+      <p class="tracking-error" role="alert">{{ loadError }}</p>
+    } @else {
+      <section class="pet-picker">
+        <h2>¿Quiénes salen a pasear?</h2>
+        <ion-select
+          label="Mascotas"
+          labelPlacement="stacked"
+          placeholder="Selecciona una o varias"
+          [(ngModel)]="selectedPetIds"
+          [multiple]="true"
+          [disabled]="state === 'running' || state === 'paused' || isSaving"
+          interface="alert">
+          @for (pet of pets; track pet.id) {
+            <ion-select-option [value]="pet.id">{{ pet.name }} · {{ pet.breed ?? 'Raza no especificada' }}</ion-select-option>
+          }
+        </ion-select>
+        @if (selectionError) {
+          <p class="tracking-error" role="alert">{{ selectionError }}</p>
+        }
+        @if (gpsError) {
+          <p class="tracking-error" role="alert">{{ gpsError }}</p>
+        }
+        @if (!pets.length) {
+          <p class="tracking-note">Vincula una mascota antes de iniciar un paseo.</p>
+        }
+      </section>
+
+      <section class="map-placeholder">
+        <div class="map-grid"></div>
+        <div class="park-shape park-one"></div>
+        <div class="park-shape park-two"></div>
+        <div class="map-road road-one"></div>
+        <div class="map-road road-two"></div>
+        <div class="map-label"><span>📍</span> {{ routePoints.length ? 'Ruta GPS registrada' : 'Esperando señal GPS' }}</div>
+        <div class="map-marker">🐕</div>
+        <div class="map-caption">{{ routePoints.length }} puntos de ubicación · {{ formattedDistance }}</div>
+      </section>
+
+      <section class="control-panel">
+        <div class="walk-status"><span class="status-dot"></span>
+          {{ state === 'running' ? 'PASEO EN CURSO' : state === 'paused' ? 'PASEO EN PAUSA' : state === 'finished' ? 'PASEO FINALIZADO' : 'LISTO PARA EMPEZAR' }}
+        </div>
+        <p class="timer-label">TIEMPO DE PASEO</p>
+        <div class="timer" aria-live="off">{{ formattedTime }}</div>
+        <div class="walk-stats">
+          <div><span class="stat-icon">↗</span><strong>{{ formattedDistance }}</strong><span>Distancia</span></div>
+          <div><span class="stat-icon">📍</span><strong>{{ routePoints.length }}</strong><span>Puntos GPS</span></div>
+          <div><span class="stat-icon">🐾</span><strong>{{ selectedPetIds.length }}</strong><span>Mascotas</span></div>
+        </div>
+        <div class="walk-controls">
+          @if (state === 'idle' || state === 'finished') {
+            <ion-button class="pause-button" shape="round"
+              [disabled]="isSaving || !pets.length" (click)="startWalk()">
+              Iniciar
+            </ion-button>
+          }
+          @if (state === 'running') {
+            <ion-button class="pause-button" shape="round" (click)="pauseWalk()">Pausar</ion-button>
+          }
+          @if (state === 'paused') {
+            <ion-button class="pause-button" shape="round" (click)="resumeWalk()">Reanudar</ion-button>
+          }
+          @if (state === 'running' || state === 'paused') {
+            <ion-button class="finish-button" shape="round" [disabled]="isSaving" (click)="finishWalk()">
+              {{ isSaving ? 'Guardando…' : 'Finalizar Paseo' }}
+            </ion-button>
+          }
+        </div>
+        <p class="tracking-note">La distancia se calcula con Haversine; GPS impreciso y saltos anómalos se descartan.</p>
+      </section>
+    }
+  </main>
+</ion-content>

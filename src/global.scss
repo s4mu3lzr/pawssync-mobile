@@ -35,3 +35,55 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+app-pet-detail .loading-state { align-items: center; color: #72858a; display: flex; flex-direction: column; gap: 0.7rem; justify-content: center; min-height: 60vh; }
+app-pet-detail .loading-state ion-spinner { color: #188565; }
+app-pet-detail .pet-management { padding: 0.2rem 1rem 1.5rem; }
+app-pet-detail .management-card { border-radius: 1.15rem; box-shadow: 0 6px 24px #1838520c; margin: 0 0 0.9rem; }
+app-pet-detail .management-card ion-card-content { padding: 1rem; }
+app-pet-detail .card-heading { align-items: center; display: flex; gap: 0.7rem; margin-bottom: 0.7rem; }
+app-pet-detail .card-icon { align-items: center; background: #e3f4ea; border-radius: 0.8rem; color: #218362; display: flex; font-size: 1.1rem; height: 2.6rem; justify-content: center; width: 2.6rem; }
+app-pet-detail .note-icon { background: #edf2fb; color: #516f9c; }
+app-pet-detail .appointment-icon { background: #fff2db; color: #ba8536; }
+app-pet-detail .card-heading .eyebrow { margin-bottom: 0.15rem; }
+app-pet-detail .card-heading h2 { color: #172d49; font-size: 1rem; font-weight: 800; margin: 0; }
+app-pet-detail .general-facts { display: grid; gap: 0.55rem; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 0.6rem 0 0.9rem; }
+app-pet-detail .general-facts div { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
+app-pet-detail .general-facts span { color: #8a989a; font-size: 0.61rem; }
+app-pet-detail .general-facts strong { color: #30485b; font-size: 0.72rem; overflow-wrap: anywhere; }
+app-pet-detail .record-list { background: transparent; padding: 0; }
+app-pet-detail .record-item { --background: #f7f9f8; --border-radius: 0.8rem; --padding-start: 0.75rem; margin-bottom: 0.4rem; }
+app-pet-detail .record-item ion-label { margin: 0.55rem 0; }
+app-pet-detail .record-item ion-label h3 { color: #30485b; font-size: 0.76rem; font-weight: 750; }
+app-pet-detail .record-item ion-label p { color: #64787d; font-size: 0.7rem; line-height: 1.45; white-space: normal; }
+app-pet-detail .record-item ion-label small { color: #9ba7a7; font-size: 0.58rem; }
+app-pet-detail .empty-state { color: #849198; font-size: 0.7rem; margin: 0; padding: 0.6rem 0.2rem 0.85rem; }
+app-pet-detail .form-field { --background: #f6f8f7; --border-radius: 0.8rem; --padding-start: 0.75rem; margin: 0.5rem 0; }
+app-pet-detail .form-field ion-input, app-pet-detail .form-field ion-textarea { --color: #213a52; font-size: 0.76rem; }
+app-pet-detail .action-button { --background: #188565; --box-shadow: none; --color: #fff; font-size: 0.73rem; font-weight: 750; min-height: 2.8rem; }
+app-pet-detail .action-button ion-spinner { height: 1rem; margin-inline-end: 0.45rem; width: 1rem; }
+app-pet-detail .appointment-form { border-top: 1px solid #edf0ef; margin-top: 0.8rem; padding-top: 0.5rem; }
+app-pet-detail .datetime-label { color: #526b75; font-size: 0.69rem; font-weight: 700; margin: 0.8rem 0 0.3rem; }
+app-pet-detail .appointment-form ion-datetime { --background: #f7f9f8; border-radius: 0.9rem; margin: 0 auto; max-width: 100%; }
+app-pet-detail .appointment-actions { align-items: center; display: flex; justify-content: space-between; margin-top: 0.5rem; }
+app-pet-detail .appointment-actions ion-button { margin: 0; }
+.password-toggle { --color: #218362; font-size: 1.05rem; margin-inline-end: 0.15rem; }
+app-home .weather-message { background: #e8f5ec; border-radius: .8rem; color: #35735a; margin: 0 1.1rem .8rem; padding: .65rem .8rem; }
+app-home .weather-message p { font-size: .7rem; font-weight: 700; margin: 0; }
+app-home .weather-message small { display: block; font-size: .6rem; margin-top: .2rem; }
+app-home .weather-warning { background: #fff2dc; color: #8a5b1a; }
+app-home .weather-condition { float: left; font-size: 1.25rem; margin-right: .5rem; }
+app-home .pet-photo { height: 100%; object-fit: cover; width: 100%; }
+app-pet-detail .crop-backdrop { align-items: center; background: #102234b8; display: flex; inset: 0; justify-content: center; padding: 1rem; position: fixed; z-index: 1000; }
+app-pet-detail .crop-dialog { background: #fff; border-radius: 1.35rem; box-shadow: 0 1rem 3rem #08172455; max-width: 25rem; padding: 1.3rem 1.15rem 1rem; width: 100%; }
+app-pet-detail .crop-dialog .eyebrow { color: #188565; margin-bottom: .35rem; }
+app-pet-detail .crop-dialog h2 { color: #172d49; font-size: 1.1rem; margin: 0; }
+app-pet-detail .crop-instructions { color: #83909b; font-size: .72rem; margin: .35rem 0 1rem; }
+app-pet-detail .crop-stage { aspect-ratio: 1; background: #172d49; border-radius: 1rem; cursor: grab; margin: 0 auto; max-width: 100%; overflow: hidden; position: relative; touch-action: none; user-select: none; width: min(100%, 19rem); }
+app-pet-detail .crop-stage:active { cursor: grabbing; }
+app-pet-detail .crop-stage img { max-width: none; object-fit: fill; pointer-events: none; position: absolute; }
+app-pet-detail .crop-frame { border: 2px solid #ffffffd9; border-radius: 50%; box-shadow: 0 0 0 999px #0c1d2b30; inset: 0; pointer-events: none; position: absolute; }
+app-pet-detail .zoom-control { align-items: center; color: #71838a; display: flex; font-size: .62rem; gap: .55rem; margin: 1rem 0 .5rem; }
+app-pet-detail .zoom-control input { accent-color: #188565; flex: 1; min-width: 0; }
+app-pet-detail .crop-actions { display: flex; justify-content: flex-end; margin-top: .4rem; }
+app-pet-detail .crop-actions ion-button { font-size: .72rem; }

@@ -1,0 +1,31 @@
+<ion-content class="public-content" [fullscreen]="true">
+  @if (isLoading) {
+    <div class="public-state"><ion-spinner name="crescent"></ion-spinner><p>Buscando a la mascota…</p></div>
+  } @else if (pet) {
+    <main class="found-card">
+      <span class="found-icon">🐾</span>
+      <p class="eyebrow">PAWSSYNC · PERFIL DE IDENTIFICACIÓN</p>
+      <h1>¡Mascota encontrada!</h1>
+      @if (pet.photo_url) {
+        <img class="pet-image" [src]="pet.photo_url" [alt]="'Foto de ' + pet.name" />
+      } @else {
+        <div class="pet-image placeholder">🐶</div>
+      }
+      <h2>{{ pet.name }}</h2>
+      <p class="age">{{ ageLabel }}</p>
+      <section class="contact-detail">
+        <strong>Dirección</strong>
+        <p>{{ pet.address || 'Dirección no disponible' }}</p>
+      </section>
+      <ion-button class="call-button" expand="block" shape="round"
+        [disabled]="!telephoneLink" [href]="telephoneLink">
+        Llamar al Dueño
+      </ion-button>
+      @if (!telephoneLink) {
+        <p class="no-phone">El teléfono de contacto no está disponible.</p>
+      }
+    </main>
+  } @else {
+    <div class="public-state error-state"><span>🐾</span><h1>No encontramos a esta mascota</h1><p>{{ error }}</p></div>
+  }
+</ion-content>

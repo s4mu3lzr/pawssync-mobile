@@ -1,0 +1,42 @@
+.tracking-content { --background: #f5f8f6; }
+.tracking-screen { display: flex; flex-direction: column; min-height: 100%; }
+.tracking-header { align-items: center; display: flex; justify-content: space-between; padding: max(1.2rem, env(safe-area-inset-top)) 1.2rem 1rem; }
+.eyebrow { color: #82918f; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.16em; margin: 0 0 0.35rem; }
+h1 { color: #172d49; font-size: 1.3rem; font-weight: 800; letter-spacing: -0.03em; margin: 0; }
+.demo-chip { background: #e6f4eb; border-radius: 1rem; color: #348564; font-size: 0.52rem; font-weight: 800; letter-spacing: 0.08em; padding: 0.45rem 0.6rem; }
+.map-placeholder { background: #e4e9e7; height: 39vh; min-height: 16rem; overflow: hidden; position: relative; }
+.map-grid { background-image: linear-gradient(#ffffff40 1px, transparent 1px), linear-gradient(90deg, #ffffff40 1px, transparent 1px); background-size: 34px 34px; inset: 0; position: absolute; }
+.park-shape { background: #c8e2ce; border-radius: 40% 55% 45% 35%; position: absolute; transform: rotate(-25deg); }
+.park-one { height: 8rem; left: 7%; top: 16%; width: 12rem; }
+.park-two { height: 7rem; right: 0; top: 48%; width: 9rem; }
+.map-road { background: #f9fbf8; border: 1px solid #d7dedb; border-radius: 4rem; height: 1.3rem; position: absolute; }
+.road-one { left: -5%; top: 43%; transform: rotate(-28deg); width: 115%; }
+.road-two { left: 26%; top: 45%; transform: rotate(57deg); width: 92%; }
+.map-label { background: #ffffffed; border-radius: 1rem; box-shadow: 0 3px 12px #172d4918; color: #536672; font-size: 0.65rem; font-weight: 700; left: 1rem; padding: 0.5rem 0.7rem; position: absolute; top: 1rem; }
+.map-label span { margin-right: 0.2rem; }
+.map-marker { align-items: center; background: #168565; border: 3px solid white; border-radius: 50%; box-shadow: 0 4px 14px #172d4940; display: flex; font-size: 1.4rem; height: 3.2rem; justify-content: center; left: 54%; position: absolute; top: 45%; width: 3.2rem; }
+.map-caption { align-items: center; background: #ffffffdf; border-radius: 1rem; bottom: 0.7rem; color: #79898e; display: flex; font-size: 0.58rem; gap: 0.4rem; left: 50%; padding: 0.45rem 0.7rem; position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.pulse, .status-dot { background: #36a77c; border-radius: 50%; height: 0.45rem; width: 0.45rem; }
+.control-panel { background: #fff; border-radius: 1.5rem 1.5rem 0 0; box-shadow: 0 -8px 28px #192f4110; flex: 1; margin-top: -1rem; padding: 1.15rem 1.2rem max(1rem, env(safe-area-inset-bottom)); position: relative; text-align: center; }
+.walk-status { align-items: center; color: #567169; display: flex; font-size: 0.59rem; font-weight: 800; gap: 0.45rem; justify-content: center; letter-spacing: 0.09em; }
+.status-dot { box-shadow: 0 0 0 4px #36a77c1c; }
+.mock-badge { background: #edf3f0; border-radius: 0.5rem; color: #81918d; font-size: 0.49rem; margin-left: 0.3rem; padding: 0.3rem 0.4rem; }
+.timer-label { color: #99a3a4; font-size: 0.56rem; font-weight: 800; letter-spacing: 0.16em; margin: 1rem 0 0.15rem; }
+.timer { color: #172d49; font-size: 3.1rem; font-variant-numeric: tabular-nums; font-weight: 800; letter-spacing: -0.06em; line-height: 1.1; }
+.timer span { color: #748591; }
+.walk-stats { border-bottom: 1px solid #edf0ef; display: flex; justify-content: space-around; margin: 1rem 0 1.1rem; padding-bottom: 1rem; }
+.walk-stats > div { align-items: center; display: flex; flex-direction: column; gap: 0.18rem; }
+.stat-icon { font-size: 0.9rem; }
+.walk-stats strong { color: #203850; font-size: 0.95rem; }
+.walk-stats strong small { color: #849197; font-size: 0.57rem; }
+.walk-stats > div > span:last-child { color: #95a0a3; font-size: 0.58rem; }
+.walk-controls { display: flex; gap: 0.6rem; }
+.walk-controls ion-button { --box-shadow: none; flex: 1; font-size: 0.68rem; font-weight: 750; height: 3rem; margin: 0; }
+.walk-controls ion-button span { margin-right: 0.4rem; }
+.pause-button { --background: #eaf5ee; --color: #287558; }
+.finish-button { --background: #d64c58; --color: white; }
+.tracking-note { color: #a4adae; font-size: 0.56rem; margin: 0.7rem 0 0; }
+.tracking-error { color: #9d5555; font-size: 0.8rem; margin: 1rem; }
+.pet-picker { padding: 1rem 1.2rem; }
+.pet-picker h2 { color: #172d49; font-size: 1rem; }
+.pet-picker ion-button { --background: #188565; margin: 0.5rem 0; }

@@ -1,0 +1,151 @@
+.generator-content {
+  --background: #f5f8f6;
+}
+
+.generator-page {
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 34rem;
+  min-height: 100%;
+  padding: 1.25rem 1rem 2rem;
+}
+
+.back-link {
+  color: #218362;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.page-heading {
+  padding: 1.5rem 0 1.1rem;
+  text-align: center;
+}
+
+.brand-paw {
+  align-items: center;
+  background: #d8f3e5;
+  border-radius: 1.1rem;
+  display: flex;
+  font-size: 2rem;
+  height: 4.2rem;
+  justify-content: center;
+  margin: 0 auto 0.8rem;
+  width: 4.2rem;
+}
+
+.eyebrow {
+  color: #218362;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  margin: 0 0 0.45rem;
+}
+
+.page-heading h1 {
+  color: #172d49;
+  font-size: clamp(1.55rem, 7vw, 2rem);
+  font-weight: 850;
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.page-heading > p:last-child {
+  color: #78878b;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin: 0.65rem 0 0;
+}
+
+.generator-form,
+.qr-result {
+  background: #fff;
+  border: 1px solid #e8efeb;
+  border-radius: 1.25rem;
+  box-shadow: 0 12px 35px #1838520c;
+  padding: 1rem;
+}
+
+.form-field {
+  --background: #f6f8f7;
+  --border-radius: 0.8rem;
+  --padding-start: 0.8rem;
+  margin-bottom: 0.7rem;
+}
+
+.form-field ion-label {
+  color: #667782;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.form-field ion-input {
+  --color: #1a3049;
+  --placeholder-color: #a1aaa9;
+  --placeholder-opacity: 1;
+  font-size: 0.85rem;
+  min-height: 2.7rem;
+}
+
+.privacy-note {
+  color: #718078;
+  font-size: 0.7rem;
+  line-height: 1.5;
+  margin: 0.9rem 0;
+}
+
+.generator-form ion-button {
+  --background: #178565;
+  --box-shadow: none;
+  font-size: 0.82rem;
+  font-weight: 750;
+  height: 3rem;
+  margin: 0;
+}
+
+.error-message {
+  color: #a74444;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  margin: 0.5rem 0 0.8rem;
+}
+
+.qr-result {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.qr-result h2 {
+  color: #172d49;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.qr-result > p {
+  color: #718078;
+  font-size: 0.76rem;
+  line-height: 1.45;
+  margin: 0.4rem 0 0.8rem;
+}
+
+.qr-result img {
+  background: #fff;
+  border: 1px solid #edf1ef;
+  border-radius: 0.8rem;
+  display: block;
+  height: min(72vw, 18rem);
+  margin: 0 auto 0.8rem;
+  width: min(72vw, 18rem);
+}
+
+.download-button {
+  background: #e8f5ee;
+  border-radius: 1.5rem;
+  color: #187653;
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 750;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+}

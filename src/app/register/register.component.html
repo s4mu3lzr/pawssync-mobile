@@ -1,0 +1,104 @@
+<ion-content class="login-content">
+  <main class="login-layout">
+    <div class="login-decoration decoration-one" aria-hidden="true"></div>
+    <div class="login-decoration decoration-two" aria-hidden="true"></div>
+
+    <section class="login-brand">
+      <div class="brand-paw" aria-hidden="true">🐾</div>
+      <p class="brand-kicker">BIENVENIDO A</p>
+      <h1>PawsSync <span>V3.0</span></h1>
+      <p class="brand-tagline">Cada paseo, una nueva aventura.</p>
+    </section>
+
+    <form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-heading">
+        <h2>Únete a la manada</h2>
+        <p>Crea tu cuenta para empezar a cuidar de tus mascotas.</p>
+      </div>
+      @if (configurationMessage) {
+        <p class="login-error" role="alert">{{ configurationMessage }}</p>
+      }
+
+      <ion-item class="login-input" lines="none">
+        <ion-label position="stacked">Nombre completo</ion-label>
+        <ion-input
+          formControlName="fullName"
+          type="text"
+          placeholder="Tu nombre"
+          autocomplete="name"
+          required
+        ></ion-input>
+      </ion-item>
+      @if (form.controls.fullName.touched && form.controls.fullName.hasError('required')) {
+        <p class="field-error">El nombre es obligatorio.</p>
+      } @else if (form.controls.fullName.touched && form.controls.fullName.hasError('whitespaceOnly')) {
+        <p class="field-error">El nombre no puede contener solo espacios.</p>
+      }
+
+      <ion-item class="login-input" lines="none">
+        <ion-label position="stacked">Correo electrónico</ion-label>
+        <ion-input
+          formControlName="email"
+          type="email"
+          placeholder="tu@correo.com"
+          autocomplete="email"
+          required
+        ></ion-input>
+      </ion-item>
+      @if (form.controls.email.touched && form.controls.email.hasError('required')) {
+        <p class="field-error">El correo es obligatorio.</p>
+      } @else if (form.controls.email.touched && form.controls.email.hasError('email')) {
+        <p class="field-error">Ingresa un correo válido.</p>
+      }
+
+      <ion-item class="login-input" lines="none">
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input
+          formControlName="password"
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Mínimo 8 caracteres y un símbolo"
+          autocomplete="new-password"
+          required
+        ></ion-input>
+        <ion-button
+          slot="end"
+          fill="clear"
+          type="button"
+          class="password-toggle"
+          [attr.aria-label]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+          (click)="showPassword = !showPassword"
+        >{{ showPassword ? '🙈' : '👁' }}</ion-button>
+      </ion-item>
+      @if (form.controls.password.touched && form.controls.password.hasError('required')) {
+        <p class="field-error">La contraseña es obligatoria.</p>
+      } @else if (form.controls.password.touched && form.controls.password.hasError('whitespaceOnly')) {
+        <p class="field-error">La contraseña no puede contener solo espacios.</p>
+      } @else if (form.controls.password.touched && form.controls.password.hasError('minlength')) {
+        <p class="field-error">La contraseña debe tener al menos 8 caracteres.</p>
+      } @else if (form.controls.password.touched && form.controls.password.hasError('specialCharacter')) {
+        <p class="field-error">La contraseña debe incluir al menos un carácter especial (por ejemplo: !, @ o #).</p>
+      }
+
+      <ion-button
+        class="login-button"
+        type="submit"
+        expand="block"
+        shape="round"
+        [disabled]="form.invalid || isLoading || !isConfigured"
+      >
+        @if (isLoading) {
+          <ion-spinner name="crescent" aria-label="Creando cuenta"></ion-spinner>
+          <span>Creando cuenta…</span>
+        } @else {
+          Crear cuenta <span aria-hidden="true">→</span>
+        }
+      </ion-button>
+      <p class="signup-copy">
+        ¿Ya tienes cuenta?
+        <a class="auth-mode-link" routerLink="/login">Inicia sesión</a>
+      </p>
+    </form>
+
+    <p class="login-footer">HECHO CON <span>♥</span> PARA QUIENES NOS ESPERAN EN CASA</p>
+  </main>
+</ion-content>

@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start" fill="clear" routerLink="/tabs/home" aria-label="Volver al inicio">‹</ion-button>
+    <ion-title>Notificaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="notifications-content" [fullscreen]="true">
+  <main class="notifications-page">
+    <header class="page-heading">
+      <span class="bell">🔔</span>
+      <div>
+        <p class="eyebrow">SALUD DE TU MANADA</p>
+        <h1>Citas próximas</h1>
+        <p>Recordatorios para los próximos 7 días.</p>
+      </div>
+    </header>
+
+    @if (isLoading) {
+      <div class="loading-state"><ion-spinner name="crescent"></ion-spinner><p>Buscando tus próximas citas…</p></div>
+    } @else if (loadError) {
+      <p class="error-state" role="alert">{{ loadError }}</p>
+    } @else if (appointments.length === 0) {
+      <section class="empty-state">
+        <span>🌿</span>
+        <h2>Todo tranquilo por ahora</h2>
+        <p>No tienes citas médicas programadas para los próximos 7 días.</p>
+      </section>
+    } @else {
+      <ion-list class="appointment-list" lines="none">
+        @for (appointment of appointments; track appointment.id) {
+          <ion-item class="appointment-item" [class.urgent]="isTodayOrTomorrow(appointment.appointment_date)">
+            <span class="appointment-icon" slot="start">🩺</span>
+            <ion-label>
+              <div class="appointment-heading">
+                <h2>{{ appointment.title }}</h2>
+                @if (isTodayOrTomorrow(appointment.appointment_date)) {
+                  <span class="soon-badge">PRONTO</span>
+                }
+              </div>
+              <p>{{ appointment.pet_name }}</p>
+              <p>{{ appointment.appointment_date | date:'EEEE d MMMM · h:mm a' }}</p>
+              @if (appointment.description) {
+                <p class="description">{{ appointment.description }}</p>
+              }
+            </ion-label>
+          </ion-item>
+        }
+      </ion-list>
+    }
+  </main>
+</ion-content>

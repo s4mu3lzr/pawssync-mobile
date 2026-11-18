@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'pawssync-mobile',
+  appId: 'com.pawssync.mobile',
+  appName: 'PawsSync Mobile',
   webDir: 'www'
 };
 

@@ -1,0 +1,40 @@
+<ion-content class="advice-page">
+  <header class="page-heading">
+    <p class="eyebrow">ASISTENTE DE PASEO</p>
+    <h1>Consejos para tu paseo</h1>
+    <p>Orientación general para cuidar mejor a tu compañero.</p>
+  </header>
+
+  <section class="conversation" aria-label="Conversación de consejos">
+    @for (message of messages$ | async; track message.id) {
+      <article class="message" [class.user-message]="message.role === 'user'">
+        <p>{{ message.content }}</p>
+        <time>{{ message.createdAt | date: 'shortTime' }}</time>
+      </article>
+    }
+  </section>
+
+  <p class="disclaimer">
+    Estos consejos son generales y no sustituyen las instrucciones del dueño ni la atención veterinaria.
+  </p>
+
+  <form class="composer" (ngSubmit)="sendQuestion()">
+    <label class="sr-only" for="advice-question">Escribe tu pregunta</label>
+    <input
+      id="advice-question"
+      name="question"
+      type="text"
+      [(ngModel)]="question"
+      [maxlength]="maxLength + 1"
+      [attr.aria-describedby]="inputError ? 'input-error' : null"
+      placeholder="Ej. ¿Qué hago si hace mucho calor?"
+      autocomplete="off"
+    />
+    <ion-button type="submit" aria-label="Enviar pregunta" [disabled]="!question.trim()">
+      <ion-icon name="send-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+  </form>
+  @if (inputError) {
+    <p id="input-error" class="input-error" role="alert">{{ inputError }}</p>
+  }
+</ion-content>

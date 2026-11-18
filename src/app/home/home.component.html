@@ -1,0 +1,107 @@
+<ion-header class="app-header">
+  <ion-toolbar>
+    <ion-title>PawsSync <span>V3.0</span></ion-title>
+    <ion-button class="header-notifications" slot="end" fill="clear" routerLink="/notifications" aria-label="Ver notificaciones">
+      <ion-icon name="notifications-outline" aria-hidden="true"></ion-icon>
+    </ion-button>
+    <ion-button class="header-avatar" slot="end" fill="clear" routerLink="/profile" aria-label="Abrir perfil de usuario">👤</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="home-content" [fullscreen]="true">
+  <section class="greeting">
+    <div>
+      <p class="eyebrow">TU ESPACIO PAWSYNC</p>
+      <h1>¡Hola! <span>👋</span></h1>
+      <p class="muted">{{ weatherCity || '¿Listos para una nueva aventura?' }}</p>
+    </div>
+    <div class="weather-badge">
+      @if (weatherLoading) {
+        <span>⏳</span>
+      } @else {
+        <span>{{ weatherIcon }}</span>
+        @if (weatherTemperature !== undefined) {
+          <strong>{{ weatherTemperature | number:'1.0-0' }}°</strong>
+        }
+      }
+    </div>
+  </section>
+  <section class="weather-message" [class.weather-warning]="weatherWarning" role="status">
+    <span class="weather-condition" aria-hidden="true">{{ weatherIcon }}</span>
+    <p>{{ weatherMessage }}</p>
+    @if (weatherError) {
+      <small>{{ weatherError }}</small>
+    }
+  </section>
+
+  <section class="walk-highlight">
+    <div class="walk-copy">
+      @if (weatherWarning) {
+        <span class="pill">PASEO NO RECOMENDADO</span>
+        <h2>Mejor quédense en casa</h2>
+        <p>Espera a que mejoren las condiciones para salir con tu mascota.</p>
+      } @else {
+        <span class="pill">MOMENTO DE AVENTURA</span>
+        <h2>¿Listos para salir?</h2>
+        <p>Inicia y registra un paseo con tu mascota.</p>
+        <ion-button routerLink="/tabs/tracking" shape="round" size="small">
+          Ver paseo <span aria-hidden="true">→</span>
+        </ion-button>
+      }
+    </div>
+    <div class="walk-dog" aria-hidden="true">🐕</div>
+  </section>
+
+  <section class="pets-section">
+    @if (pets$ | async; as pets) {
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">TU MANADA</p>
+          <h2>Mis mascotas <span>{{ pets.length }}</span></h2>
+        </div>
+        <a routerLink="/tabs/scanner">+ Vincular</a>
+      </div>
+
+      @if (loadError) {
+        <p class="load-error">{{ loadError }}</p>
+      }
+      @if (isLoading && pets.length === 0) {
+        <p class="muted">Cargando tus mascotas…</p>
+      } @else if (pets.length === 0 && !loadError) {
+        <p class="muted">Todavía no tienes mascotas vinculadas. Escanea el QR de un collar para comenzar.</p>
+      }
+      <div class="pet-grid">
+        @for (pet of pets; track pet.id) {
+          <ion-card class="pet-card" [routerLink]="['/pets', pet.id]">
+            <div class="pet-art" [class.mint-art]="pet.color === 'mint'" [class.blue-art]="pet.color === 'blue'">
+              @if (pet.photoUrl) {
+                <img class="pet-photo" [src]="pet.photoUrl" [alt]="'Foto de ' + pet.name" />
+              } @else {
+                <span class="pet-emoji" aria-hidden="true">{{ pet.emoji }}</span>
+              }
+              <span class="heart" aria-hidden="true">♥</span>
+            </div>
+            <ion-card-content>
+              <div class="pet-name-row">
+                <h3>{{ pet.name }}</h3>
+                <span aria-hidden="true">›</span>
+              </div>
+              <p>{{ pet.breed }}</p>
+              <div class="pet-stats">
+                <span>◷ {{ pet.age }}</span>
+                <span>♡ {{ pet.weight }}</span>
+              </div>
+              <div class="next-walk">🦮 &nbsp;{{ pet.walk }}</div>
+            </ion-card-content>
+          </ion-card>
+        }
+      </div>
+    }
+  </section>
+
+  <section class="tip-card">
+    <span class="tip-icon" aria-hidden="true">💡</span>
+    <div><strong>Un consejo para hoy</strong><p>Recuerda llevar agua fresca para el paseo.</p></div>
+    <span class="tip-arrow" aria-hidden="true">›</span>
+  </section>
+</ion-content>

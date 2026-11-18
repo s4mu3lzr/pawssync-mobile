@@ -1,0 +1,23 @@
+.notifications-content { --background: #f5f8f6; }
+ion-toolbar { --background: #f5f8f6; }
+ion-title { color: #172d49; font-size: .95rem; font-weight: 800; }
+.notifications-page { padding: 1.2rem 1rem 2rem; }
+.page-heading { align-items: center; display: flex; gap: .9rem; margin: .5rem 0 1.2rem; }
+.bell { align-items: center; background: #e5f4eb; border-radius: 1rem; display: flex; font-size: 1.6rem; height: 3.5rem; justify-content: center; width: 3.5rem; }
+.eyebrow { color: #82918f; font-size: .58rem; font-weight: 800; letter-spacing: .13em; margin: 0 0 .25rem; }
+h1, h2, p { margin-top: 0; }
+.page-heading h1 { color: #172d49; font-size: 1.3rem; font-weight: 800; margin: 0; }
+.page-heading p:last-child { color: #83909b; font-size: .68rem; margin: .2rem 0 0; }
+.appointment-list { background: transparent; }
+.appointment-item { --background: #fff; --border-radius: 1rem; --padding-start: .85rem; --inner-padding-end: .85rem; box-shadow: 0 5px 18px #19334f0b; margin: .65rem 0; }
+.appointment-item.urgent { --background: #fff8e8; }
+.appointment-icon { align-items: center; background: #edf7f0; border-radius: .8rem; display: flex; font-size: 1.15rem; height: 2.8rem; justify-content: center; margin-inline-end: .75rem; width: 2.8rem; }
+.appointment-heading { align-items: center; display: flex; gap: .5rem; justify-content: space-between; }
+.appointment-heading h2 { color: #223b50; font-size: .83rem; font-weight: 800; margin: .65rem 0 .3rem; }
+.soon-badge { background: #ffedc8; border-radius: 1rem; color: #946219; font-size: .48rem; font-weight: 850; padding: .25rem .4rem; }
+.appointment-item ion-label p { color: #71838a; font-size: .66rem; line-height: 1.45; margin: .18rem 0; white-space: normal; }
+.loading-state, .empty-state { align-items: center; color: #71838a; display: flex; flex-direction: column; justify-content: center; min-height: 48vh; text-align: center; }
+.empty-state span { font-size: 2.8rem; }
+.empty-state h2 { color: #294356; font-size: 1.05rem; margin: .7rem 0 .35rem; }
+.empty-state p { color: #83909b; font-size: .75rem; max-width: 18rem; }
+.error-state { background: #fff0f0; border-radius: .8rem; color: #9d5555; font-size: .75rem; padding: .9rem; }

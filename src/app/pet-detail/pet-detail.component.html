@@ -1,0 +1,325 @@
+<ion-header class="detail-header">
+  <ion-toolbar>
+    <ion-button slot="start" fill="clear" routerLink="/tabs/home" aria-label="Volver al inicio">‹</ion-button>
+    <ion-title>{{ pet?.name ?? 'Mi mascota' }}</ion-title>
+    <span slot="end" class="header-menu">🐾</span>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="detail-content" [fullscreen]="true">
+  @if (isLoading) {
+    <div class="loading-state">
+      <ion-spinner name="crescent" aria-label="Cargando datos de la mascota"></ion-spinner>
+      <p>Cargando información…</p>
+    </div>
+  } @else if (pet; as profile) {
+    <section class="profile-hero">
+      <div class="hero-orbit orbit-one"></div>
+      <div class="hero-orbit orbit-two"></div>
+      <div class="profile-photo mint-photo">
+        @if (profile.photo_url) {
+          <img [src]="profile.photo_url" [alt]="'Foto de ' + profile.name" />
+        } @else {
+          <span>🐶</span>
+        }
+        <span class="photo-heart">♥</span>
+      </div>
+      <ion-button class="photo-button" shape="round" size="small" [disabled]="isChangingPhoto" (click)="changePhoto()">
+        @if (isChangingPhoto) {
+          <ion-spinner name="crescent"></ion-spinner>
+          Abriendo fotos…
+        } @else {
+          Cambiar foto
+        }
+      </ion-button>
+      <span class="online-status"><i></i> Vinculada</span>
+      <h1>{{ profile.name }} <span>✦</span></h1>
+      <p>{{ profile.breed ?? 'Raza no especificada' }}</p>
+    </section>
+
+    <main class="pet-management">
+      <ion-card class="management-card general-card">
+        <ion-card-content>
+          <div class="card-heading">
+            <span class="card-icon">🐾</span>
+            <div>
+              <p class="eyebrow">PERFIL</p>
+              <h2>Datos generales</h2>
+            </div>
+          </div>
+          <div class="general-facts">
+            <div><span>Nombre</span><strong>{{ profile.name }}</strong></div>
+            <div><span>Raza</span><strong>{{ profile.breed ?? 'No especificada' }}</strong></div>
+            <div><span>Edad</span><strong>{{ petAge }}</strong></div>
+          </div>
+          <ion-button class="walk-button" expand="block" shape="round"
+            [routerLink]="['/tabs/tracking']" [queryParams]="{ pet_id: profile.id }">
+            🦮 Planear un paseo
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="management-card">
+        <ion-card-content>
+          <div class="card-heading">
+            <span class="card-icon">✎</span>
+            <div>
+              <p class="eyebrow">INFORMACIÓN DE CONTACTO</p>
+              <h2>Datos de seguridad</h2>
+            </div>
+          </div>
+          <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+            <p class="datetime-label">Fecha de nacimiento</p>
+            <ion-datetime
+              formControlName="birth_date"
+              presentation="date"
+              [max]="minimumAppointmentDate.slice(0, 10)"
+              locale="es"
+            ></ion-datetime>
+            <ion-item class="form-field" lines="none">
+              <ion-textarea
+                label="Dirección"
+                labelPlacement="stacked"
+                placeholder="Dirección para localizar a tu mascota"
+                formControlName="address"
+                [autoGrow]="true"
+                maxlength="500"
+              ></ion-textarea>
+            </ion-item>
+            <ion-item class="form-field" lines="none">
+              <ion-input
+                label="Teléfono de contacto"
+                labelPlacement="stacked"
+                type="tel"
+                placeholder="+52 555 123 4567"
+                formControlName="contact_phone"
+                maxlength="40"
+              ></ion-input>
+            </ion-item>
+            @if (profileForm.controls.contact_phone.touched && profileForm.controls.contact_phone.hasError('pattern')) {
+              <p class="field-error" role="alert">Ingresa un teléfono válido con números y, si lo necesitas, +, espacios, paréntesis o guiones.</p>
+            }
+            <ion-button class="action-button" expand="block" shape="round" type="submit"
+              [disabled]="profileForm.invalid || profileForm.pristine || isSavingProfile">
+              @if (isSavingProfile) {
+                <ion-spinner name="crescent"></ion-spinner><span>Guardando…</span>
+              } @else {
+                Guardar cambios
+              }
+            </ion-button>
+          </form>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="management-card">
+        <ion-card-content>
+          <div class="card-heading">
+            <span class="card-icon appointment-icon">🦮</span>
+            <div>
+              <p class="eyebrow">ACTIVIDAD</p>
+              <h2>Historial de paseos</h2>
+            </div>
+          </div>
+          <ion-list class="record-list" lines="none">
+            @for (walk of walkHistory; track walk.id) {
+              <ion-item class="record-item">
+                <ion-label>
+                  <h3>{{ walk.start_time | date:'fullDate' }}</h3>
+                  <p>{{ walk.start_time | date:'shortTime' }} · {{ (walk.duration_seconds ?? 0) / 60 | number:'1.0-0' }} min</p>
+                  @if (walk.distance_meters !== null) {
+                    <p>{{ walk.distance_meters >= 1000 ? (walk.distance_meters / 1000 | number:'1.2-2') + ' km' : (walk.distance_meters | number:'1.0-0') + ' m' }}</p>
+                  }
+                </ion-label>
+              </ion-item>
+            } @empty {
+              <p class="empty-state">Todavía no hay paseos registrados.</p>
+            }
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="management-card">
+        <ion-card-content>
+          <div class="card-heading">
+            <span class="card-icon note-icon">✎</span>
+            <div>
+              <p class="eyebrow">RECUERDOS Y CUIDADOS</p>
+              <h2>Comentarios extras</h2>
+            </div>
+          </div>
+
+          <ion-list class="record-list" lines="none">
+            @for (note of notes; track note.id) {
+              <ion-item class="record-item">
+                <ion-label>
+                  <p>{{ note.note_text }}</p>
+                  <small>{{ note.created_at | date:'medium' }}</small>
+                </ion-label>
+              </ion-item>
+            } @empty {
+              <p class="empty-state">Aún no hay comentarios para esta mascota.</p>
+            }
+          </ion-list>
+
+          <ion-item class="form-field" lines="none">
+            <ion-textarea
+              [(ngModel)]="noteText"
+              [ngModelOptions]="{ standalone: true }"
+              label="Nueva nota"
+              labelPlacement="stacked"
+              placeholder="Añade un detalle importante…"
+              [autoGrow]="true"
+              maxlength="2000"
+            ></ion-textarea>
+          </ion-item>
+          <ion-button class="action-button" expand="block" shape="round"
+            [disabled]="!noteText.trim() || isSavingNote" (click)="addNote()">
+            @if (isSavingNote) {
+              <ion-spinner name="crescent"></ion-spinner><span>Guardando nota…</span>
+            } @else {
+              Agregar nota
+            }
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="management-card">
+        <ion-card-content>
+          <div class="card-heading">
+            <span class="card-icon appointment-icon">▣</span>
+            <div>
+              <p class="eyebrow">ORGANIZA SU SALUD</p>
+              <h2>Próximas citas</h2>
+            </div>
+          </div>
+
+          <ion-list class="record-list" lines="none">
+            @for (appointment of appointments; track appointment.id) {
+              <ion-item class="record-item">
+                <ion-label>
+                  <h3>{{ appointment.title }}</h3>
+                  <p>{{ appointment.appointment_date | date:'fullDate' }} · {{ appointment.appointment_date | date:'shortTime' }}</p>
+                  @if (appointment.description) {
+                    <p>{{ appointment.description }}</p>
+                  }
+                </ion-label>
+              </ion-item>
+            } @empty {
+              <p class="empty-state">No hay citas próximas agendadas.</p>
+            }
+          </ion-list>
+
+          @if (isAppointmentFormVisible) {
+            <div class="appointment-form">
+              <ion-item class="form-field" lines="none">
+                <ion-input
+                  [(ngModel)]="appointmentTitle"
+                  [ngModelOptions]="{ standalone: true }"
+                  label="Nombre de la cita"
+                  labelPlacement="stacked"
+                  placeholder="Veterinario, vacuna…"
+                  maxlength="120"
+                  required
+                ></ion-input>
+              </ion-item>
+              <ion-item class="form-field description-field" lines="none">
+                <ion-textarea
+                  [(ngModel)]="appointmentDescription"
+                  [ngModelOptions]="{ standalone: true }"
+                  label="Descripción (opcional)"
+                  labelPlacement="stacked"
+                  placeholder="Detalles adicionales"
+                  [autoGrow]="true"
+                  maxlength="1000"
+                ></ion-textarea>
+              </ion-item>
+              <p class="datetime-label">Fecha y hora</p>
+              <ion-datetime
+                [(ngModel)]="appointmentDate"
+                [ngModelOptions]="{ standalone: true }"
+                [min]="minimumAppointmentDate"
+                presentation="date-time"
+                locale="es"
+              ></ion-datetime>
+              <div class="appointment-actions">
+                <ion-button fill="clear" (click)="toggleAppointmentForm()">Cancelar</ion-button>
+                <ion-button class="action-button" shape="round"
+                  [disabled]="!appointmentTitle.trim() || isSavingAppointment"
+                  (click)="addAppointment()">
+                  @if (isSavingAppointment) {
+                    <ion-spinner name="crescent"></ion-spinner><span>Guardando…</span>
+                  } @else {
+                    Guardar cita
+                  }
+                </ion-button>
+              </div>
+            </div>
+          } @else {
+            <ion-button class="action-button" expand="block" shape="round" (click)="toggleAppointmentForm()">
+              Agendar cita
+            </ion-button>
+          }
+        </ion-card-content>
+      </ion-card>
+    </main>
+  } @else {
+    <section class="not-found">
+      <span>🐾</span>
+      <h1>{{ loadError || 'No encontramos esa mascota' }}</h1>
+      <ion-button shape="round" routerLink="/tabs/home">Volver al inicio</ion-button>
+    </section>
+  }
+  @if (isCropperOpen) {
+    <div class="crop-backdrop">
+      <section class="crop-dialog" role="dialog" aria-modal="true" aria-labelledby="crop-title">
+        <p class="eyebrow">AJUSTAR IMAGEN</p>
+        <h2 id="crop-title">Encuadra la foto de {{ pet?.name }}</h2>
+        <p class="crop-instructions">Arrastra la imagen para centrarla y ajusta el zoom.</p>
+        <div
+          #cropStage
+          class="crop-stage"
+          (pointerdown)="startCropDrag($event)"
+          (pointermove)="moveCropDrag($event)"
+          (pointerup)="endCropDrag($event)"
+          (pointercancel)="endCropDrag($event)"
+        >
+          <img
+            [src]="pendingPhotoDataUrl"
+            alt="Ajuste de la foto de la mascota"
+            draggable="false"
+            [style.width.px]="cropImageWidth"
+            [style.height.px]="cropImageHeight"
+            [style.left.px]="cropImageLeft"
+            [style.top.px]="cropImageTop"
+            (load)="onCropImageLoad($event)"
+          />
+          <span class="crop-frame" aria-hidden="true"></span>
+        </div>
+        <label class="zoom-control" for="photo-zoom">
+          <span>Alejar</span>
+          <input
+            id="photo-zoom"
+            type="range"
+            min="1"
+            max="3"
+            step="0.01"
+            [value]="cropZoom"
+            (input)="onCropZoomChange($event)"
+            aria-label="Ajustar zoom de la fotografía"
+          />
+          <span>Acercar</span>
+        </label>
+        <div class="crop-actions">
+          <ion-button fill="clear" [disabled]="isChangingPhoto" (click)="cancelPhotoCrop()">Cancelar</ion-button>
+          <ion-button class="action-button" shape="round" [disabled]="isChangingPhoto" (click)="saveCroppedPhoto()">
+            @if (isChangingPhoto) {
+              <ion-spinner name="crescent"></ion-spinner><span>Guardando…</span>
+            } @else {
+              Guardar foto
+            }
+          </ion-button>
+        </div>
+      </section>
+    </div>
+  }
+</ion-content>

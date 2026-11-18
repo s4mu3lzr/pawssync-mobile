@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start" fill="clear" routerLink="/tabs/home" aria-label="Volver al inicio">‹</ion-button>
+    <ion-title>Mi perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="profile-content" [fullscreen]="true">
+  @if (isLoading) {
+    <div class="profile-state"><ion-spinner name="crescent"></ion-spinner><p>Cargando perfil…</p></div>
+  } @else if (loadError) {
+    <div class="profile-state"><p role="alert">{{ loadError }}</p></div>
+  } @else {
+    <main class="profile-card">
+      <div class="profile-avatar">🐾</div>
+      <p class="eyebrow">CUENTA PAWSSYNC</p>
+      <h1>{{ fullName }}</h1>
+      <p class="profile-email">{{ email }}</p>
+
+      <form [formGroup]="passwordForm" (ngSubmit)="updatePassword()">
+        <h2>Cambiar contraseña</h2>
+        <ion-item lines="none">
+          <ion-input
+            label="Nueva contraseña"
+            labelPlacement="stacked"
+            type="password"
+            formControlName="password"
+            autocomplete="new-password"
+            placeholder="Mínimo 6 caracteres"
+          ></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-input
+            label="Confirmar contraseña"
+            labelPlacement="stacked"
+            type="password"
+            formControlName="confirmation"
+            autocomplete="new-password"
+          ></ion-input>
+        </ion-item>
+        <ion-button expand="block" shape="round" type="submit"
+          [disabled]="passwordForm.invalid || isSaving">
+          @if (isSaving) {
+            <ion-spinner name="crescent"></ion-spinner><span>Actualizando…</span>
+          } @else {
+            Actualizar contraseña
+          }
+        </ion-button>
+      </form>
+      <ion-button expand="block" fill="outline" shape="round" color="danger" (click)="signOut()">
+        Cerrar sesión
+      </ion-button>
+    </main>
+  }
+</ion-content>

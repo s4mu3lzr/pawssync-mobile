@@ -1,0 +1,76 @@
+<ion-content class="generator-content">
+  <main class="generator-page">
+    <a class="back-link" routerLink="/login">← Volver a PawsSync</a>
+
+    <header class="page-heading">
+      <div class="brand-paw" aria-hidden="true">🐾</div>
+      <p class="eyebrow">PAWSSYNC · VINCULACIÓN</p>
+      <h1>Genera un QR para tu mascota</h1>
+      <p>Escanéalo desde la app PawsSync para crear y vincular el perfil.</p>
+    </header>
+
+    <form class="generator-form" (ngSubmit)="generate()">
+      <ion-item class="form-field" lines="none">
+        <ion-label position="stacked">Nombre de la mascota *</ion-label>
+        <ion-input
+          name="name"
+          [(ngModel)]="name"
+          (ngModelChange)="clearQr()"
+          maxlength="80"
+          autocomplete="off"
+          placeholder="Ej. Luna"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="form-field" lines="none">
+        <ion-label position="stacked">Raza *</ion-label>
+        <ion-input
+          name="breed"
+          [(ngModel)]="breed"
+          (ngModelChange)="clearQr()"
+          maxlength="80"
+          autocomplete="off"
+          placeholder="Ej. Mestiza"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="form-field" lines="none">
+        <ion-label position="stacked">Fecha de nacimiento (opcional)</ion-label>
+        <ion-input
+          name="birthDate"
+          [(ngModel)]="birthDate"
+          (ngModelChange)="clearQr()"
+          type="date"
+          [max]="maxDate"
+        ></ion-input>
+      </ion-item>
+
+      <p class="privacy-note">
+        El QR contiene el nombre, la raza y, si la agregas, la fecha de nacimiento. No incluyas datos
+        privados: cualquiera que escanee el código puede leerlos. La mascota se guarda en la base de
+        datos solo cuando se escanea desde la app y se confirma el registro.
+      </p>
+
+      @if (errorMessage) {
+        <p class="error-message" role="alert">{{ errorMessage }}</p>
+      }
+
+      <ion-button expand="block" shape="round" type="submit" [disabled]="isGenerating">
+        {{ isGenerating ? 'Generando código…' : 'Generar código QR' }}
+      </ion-button>
+    </form>
+
+    @if (generatedQr; as qr) {
+      <section class="qr-result" aria-live="polite">
+        <h2>¡Tu QR está listo!</h2>
+        <p>Abre PawsSync en tu teléfono y usa <strong>Vincular</strong> para escanearlo.</p>
+        <img [src]="qr.imageDataUrl" [alt]="'Código QR de registro para ' + name" />
+        <a class="download-button" [href]="qr.imageDataUrl" [download]="qr.fileName">
+          Descargar imagen PNG
+        </a>
+      </section>
+    }
+  </main>
+</ion-content>

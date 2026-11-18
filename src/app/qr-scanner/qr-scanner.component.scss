@@ -1,0 +1,27 @@
+.scanner-content { --background: #102238; }
+.scanner-screen { background: radial-gradient(ellipse at 50% 52%, #25435a 0, #172d43 49%, #102238 100%); color: white; display: flex; flex-direction: column; min-height: 100%; padding: max(1.25rem, env(safe-area-inset-top)) 1.3rem max(1rem, env(safe-area-inset-bottom)); }
+.scanner-header { align-items: center; color: #c2d0d6; display: flex; font-size: 0.64rem; font-weight: 800; gap: 0.5rem; letter-spacing: 0.15em; }
+.header-paw { font-size: 1.15rem; }
+.demo-label { background: #ffffff18; border-radius: 1rem; color: #a9e8cb; font-size: 0.52rem; letter-spacing: 0.12em; margin-left: auto; padding: 0.35rem 0.55rem; }
+.scanner-message { margin: 2.2rem 0 1.3rem; text-align: center; }
+.eyebrow { color: #83d6b1; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.2em; margin: 0 0 0.65rem; }
+h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.05em; line-height: 1.04; margin: 0; }
+.scanner-message > p:last-child { color: #c2d0d6; font-size: 0.77rem; margin: 0.7rem 0 0; }
+.camera-preview { align-items: center; background: linear-gradient(145deg, #23445b, #1a354b); border: 1px solid #ffffff15; border-radius: 1.5rem; display: flex; flex: 1; flex-direction: column; justify-content: center; min-height: 17rem; overflow: hidden; position: relative; }
+.preview-glow { background: #85d7b422; border-radius: 50%; filter: blur(32px); height: 11rem; position: absolute; width: 11rem; }
+.scan-frame { border: 1px solid #b5e6cf30; border-radius: 1.1rem; height: min(60vw, 14rem); max-height: 14rem; max-width: 14rem; position: relative; width: min(60vw, 14rem); }
+.corner { border-color: #a7efca; border-style: solid; height: 2.1rem; position: absolute; width: 2.1rem; }
+.top-left { border-width: 3px 0 0 3px; border-radius: 0.5rem 0 0; left: -2px; top: -2px; }
+.top-right { border-width: 3px 3px 0 0; border-radius: 0 0.5rem 0 0; right: -2px; top: -2px; }
+.bottom-left { border-width: 0 0 3px 3px; border-radius: 0 0 0 0.5rem; bottom: -2px; left: -2px; }
+.bottom-right { border-width: 0 3px 3px 0; border-radius: 0 0 0.5rem; bottom: -2px; right: -2px; }
+.scan-line { animation: scan 2.4s ease-in-out infinite; background: linear-gradient(90deg, transparent, #9ff2c7, transparent); box-shadow: 0 0 18px #9ff2c799; height: 2px; left: 0.75rem; position: absolute; right: 0.75rem; top: 50%; }
+.scan-paw { align-items: center; background: #ffffff12; border: 1px solid #ffffff20; border-radius: 50%; display: flex; font-size: 2rem; height: 4.5rem; justify-content: center; left: 50%; opacity: 0.65; position: absolute; top: 50%; transform: translate(-50%, -50%); width: 4.5rem; }
+.camera-hint { bottom: 1rem; color: #b8c9d1; font-size: 0.52rem; font-weight: 700; letter-spacing: 0.15em; position: absolute; }
+.scanner-actions { padding-top: 1.1rem; text-align: center; }
+.scanner-actions p { color: #bdcbd2; font-size: 0.72rem; line-height: 1.55; margin: 0 0 0.9rem; }
+.scanner-actions ion-button { --background: #c5f0da; --box-shadow: 0 8px 22px #90ebbd25; --color: #173f35; font-size: 0.8rem; font-weight: 800; height: 3.3rem; margin: 0; }
+.scanner-actions ion-button span { margin-right: 0.45rem; }
+.scanner-actions .simulate-button { --border-color: #a9c2ca; --color: #dce9e8; --background: transparent; font-size: 0.72rem; height: 2.8rem; margin-top: 0.55rem; }
+.scanner-actions small { color: #7e96a1; display: block; font-size: 0.6rem; margin-top: 0.65rem; }
+@keyframes scan { 0%, 100% { transform: translateY(-3.3rem); } 50% { transform: translateY(3.3rem); } }
